@@ -1,15 +1,16 @@
 package main
 
-import "fmt"
+import (
+	"testing"
+)
 
 func main() {
-	// NOTE: Vectors in matrices are represented as rows for matching with the way systems of linear equations are written
-	// NOTE: We are storing output vector as the last column just for convenience.
-	// NOTE: The matrix must have dimensions n * (n+1), but we will not check for correspondance, just assume it is correct.
-	// NOTE: Min n = 1
-	A := [][]float64{{2, 1, -1, 8}, {-3, -1, 2, -11}, {-2, 1, 2, -3}}
-	fmt.Println(A)
-	fmt.Println(gauss(A))
+	testing.Main(
+		/* matchString */ func(a, b string) (bool, error) { return a == b, nil },
+		/* tests */ []testing.InternalTest{
+			{Name: "Test FindMinimum", F: TestGauss},
+		},
+		/* benchmarks */ nil /* examples */, nil)
 }
 
 // Solves system of linear equations written in the matrix form
@@ -41,4 +42,30 @@ func gauss(A [][]float64) []float64 {
 		res[i] /= A[i][i]
 	}
 	return res
+}
+
+func equal(a, b []float64) bool {
+	if len(a) != len(b) {
+		return false
+	}
+	for i := range a {
+		if a[i] != b[i] {
+			return false
+		}
+	}
+	return true
+}
+
+func TestGauss(t *testing.T) {
+	for num, tc := range []struct {
+		input [][]float64
+		want  []float64
+	}{
+		{[][]float64{{2, 1, -1, 8}, {-3, -1, 2, -11}, {-2, 1, 2, -3}}, []float64{2, 3, -1}},
+		{[][]float64{{2, 3}}, []float64{1.5}},
+	} {
+		if got := gauss(tc.input); !equal(got, tc.want) {
+			t.Errorf("Test No.%v failed: got = %v, want = %v", num, got, tc.want)
+		}
+	}
 }
