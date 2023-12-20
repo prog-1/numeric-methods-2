@@ -32,17 +32,16 @@ func main() {
 	var n int
 	fmt.Scan(&n)
 	if n == 0 {
-		fmt.Println("what you expected? Magic? I read the equation from your mind?")
-	} else {
-		a := make([][]float64, n)
-		for i := 0; i < n; i++ {
-			a[i] = make([]float64, n+1)
-			fmt.Printf("Please, enter the coefficients of the equations № %v: ", i+1)
-			for j := 0; j < n+1; j++ {
-				fmt.Scan(&a[i][j])
-			}
-		}
-		ans := GaussElimination(a, n)
-		fmt.Printf("The answer is: %v", ans)
+		fmt.Println("What you expected? Magic? I read the equation from your mind?")
 	}
+	a := make([][]float64, n)
+	for i := 0; i < n; i++ {
+		a[i] = make([]float64, n+1)
+		fmt.Printf("Please, enter the coefficients of the equations № %v: ", i+1)
+		for j := 0; j < n+1; j++ {
+			fmt.Scan(&a[i][j])
+		}
+	}
+	ans := GaussElimination(a, n)
+	fmt.Printf("The answer is: %v", ans)
 }
