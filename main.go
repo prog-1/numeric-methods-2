@@ -25,17 +25,20 @@ func gauss(A [][]float64) []float64 {
 	// 2. Eliminating
 	for j := 0; j < n-1; j++ { // Columns
 		for i := j + 1; i < n; i++ { // Rows
-			if i == 2 {
-				fmt.Println("Sorting things out")
-			}
 			c := A[i][j] / A[j][j]    // Subtrahend column multiplier
 			for k := j; k <= n; k++ { // Columns
 				A[i][k] -= c * A[j][k] // Elimination
 			}
 		}
 	}
-	fmt.Println(A)
-	//
-	f := make([]float64, len(A))
-	return f
+	// 3. Solving
+	res := make([]float64, len(A))
+	for i := n - 1; i >= 0; i-- { // Rows
+		res[i] = A[i][n]
+		for j := i + 1; j < n; j++ {
+			res[i] -= A[i][j] * res[j]
+		}
+		res[i] /= A[i][i]
+	}
+	return res
 }
