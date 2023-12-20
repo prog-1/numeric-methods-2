@@ -31,7 +31,7 @@ func main() {
 	fmt.Println("Please, enter the number of equations: ")
 	var n int
 	fmt.Scan(&n)
-	if n == 0 {
+	if n <= 0 {
 		fmt.Println("What you expected? Magic? I read the equation from your mind?")
 	}
 	a := make([][]float64, n)
