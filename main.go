@@ -33,6 +33,7 @@ func main() {
 	fmt.Scan(&n)
 	if n <= 0 {
 		fmt.Println("What you expected? Magic? I read the equation from your mind?")
+		return
 	}
 	a := make([][]float64, n)
 	for i := 0; i < n; i++ {
