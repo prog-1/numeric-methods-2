@@ -4,7 +4,7 @@ import (
 	"log"
 )
 
-func gaussMethod(matrix [][]float64) {
+func gaussMethod(matrix [][]float64) []float64 {
 	for i := 0; i < len(matrix); i++ {
 		for indx := i; indx < len(matrix); indx++ {
 			if matrix[indx][i] != 0 {
@@ -40,7 +40,7 @@ func gaussMethod(matrix [][]float64) {
 
 	}
 
-	log.Print(solution)
+	return solution
 }
 
 func main() {
